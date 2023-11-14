@@ -1,0 +1,95 @@
+﻿@{
+
+ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.12/signalr.min.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/notification-hub").build();
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        connection.on("NewUserJoined", function (username) {
+            var newusername = document.getElementById("newuserjoined");
+            newusername.innerText = username + " " + "joined chat ";
+            setTimeout(() => {
+                newusername.innerText = "";
+            }, 3000)
+        });
+
+        connection.on("ReceiveMessage", function (fromUser, message) {
+            var message = fromUser + " : " + message;
+            var li = document.createElement("li");
+            li.textContent = message;
+            document.getElementById("chat").appendChild(li);
+        });
+
+        connection.on("GetConnectedUsers", function (connectedUsers) {
+            var userList = document.getElementById("toUser");
+            userList.innerHTML = "";
+            connectedUsers.forEach(function (user) {
+                var option = document.createElement("option");
+                option.text = user;
+                option.value = user;
+                document.getElementById("toUser").add(option);
+            });
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        function joinChat() {
+            var username = document.getElementById("user").value;
+            connection.invoke("JoinChat", username).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
+        function broadCastMessage() {
+            var message = document.getElementById("message").value;
+            connection.invoke("BroadCastMessage", message).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
+        function sendMessage() {
+
+            var toUser = document.getElementById("toUser").value;
+            var message = document.getElementById("message").value;
+
+            // to show sended message
+            var fromUser = document.getElementById("user").value;
+            var fromMessage = fromUser + " : " + message;
+            var li = document.createElement("li");
+            li.textContent = fromMessage;
+            document.getElementById("chat").appendChild(li);
+            
+            if (toUser == fromUser) {
+                return;
+            }
+            connection.invoke("SendMessageToUser", toUser, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+    </script>
+</head>
+<div class="text-center">
+    <h5 id="newuserjoined" style=" height: 20px;"></h5>
+    <h1 class="display-4">SignalR MVC Chat App</h1>
+    <input type="text" id="user" placeholder="Enter your name" />
+    <button  onclick="joinChat()">Join Chat</button>
+    <br />
+    <select id="toUser">
+        <option value="">Select user to send message</option>
+    </select>
+    <br />
+    <textarea id="message" placeholder="Type your message"></textarea>
+    <br />
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="broadCastMessage()">BroadCast to All</button>
+    <hr />
+    <div id="chat"></div>
+</div>
