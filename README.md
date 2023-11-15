@@ -1,8 +1,12 @@
 # SignalR-MVC-Chat-App
 
+- [**Overview**](#overview)
+- [**Demo**](#demo)
+- [**Steps for Implementation**](#steps-for-implementation)
+
 ## Overview
 
-This repository contains a real-time messaging application implemented using SignalR. The application demonstrates bidirectional communication between clients and a server, enabling real-time updates and messaging.
+This repository contains a real-time messaging application implemented using SignalR in `.Net 7`. The application demonstrates bidirectional communication between clients and a server, enabling real-time updates and messaging.
 ## Demo
 
 https://github.com/sahilmankar/SignalR-MVC-Chat-App/assets/110836726/e6616f85-988c-4a8c-8594-16701311d811
@@ -39,7 +43,7 @@ public class ChatHub : Hub<IChatClient>
 }
 ```
 
-Here In Above ,This method is invoked when a client sends a message, and it broadcasts the message to all connected clients.
+Here In Above ,This method is invoked when a client sends a message, and it broadcasts the message to all connected clients. Here _connections Dictionary object have connectionId as key and username as value.
 
 ### IChatClient Interface
 
@@ -73,7 +77,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapHub<ChatHub>("/notification-hub");
+app.MapHub<ChatHub>("/chat-hub");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
@@ -94,7 +98,7 @@ This is essential js file to setup Connection with Hub.
 ```html
 <script>
   var connection = new signalR.HubConnectionBuilder()
-    .withUrl("/notification-hub")
+    .withUrl("/chat-hub")
     .build();
 
   connection.on("NewUserJoined", function (username) {
