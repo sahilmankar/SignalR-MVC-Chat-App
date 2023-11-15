@@ -1,11 +1,12 @@
 # SignalR-MVC-Chat-App
 
-## Demo
-
-![](/wwwroot/demo.mkv)
 ## Overview
 
 This repository contains a real-time messaging application implemented using SignalR. The application demonstrates bidirectional communication between clients and a server, enabling real-time updates and messaging.
+## Demo
+
+https://github.com/sahilmankar/SignalR-MVC-Chat-App/assets/110836726/e6616f85-988c-4a8c-8594-16701311d811
+
 
 ## Steps for Implementation
 
@@ -130,7 +131,7 @@ This is essential js file to setup Connection with Hub.
 
 This script sets up a SignalR connection, defines event handlers for events raised by the server, and starts the connection. These are Function that we have defined in `IChatClient.cs` Interface.
 
-### IV. User Interaction Functions
+### III. User Interaction Functions
 
 ```javascript
 <script>
