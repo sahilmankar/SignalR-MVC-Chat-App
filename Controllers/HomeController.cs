@@ -9,10 +9,10 @@ namespace SignalRMVCApp.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IHubContext<NotificationHub,INotificationClient> _hub;  
+    private readonly IHubContext<ChatHub,IChatClient> _hub;  
     // not required but thats how you inject signalR Hub .
 
-    public HomeController(ILogger<HomeController> logger, IHubContext<NotificationHub, INotificationClient> hub)
+    public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub, IChatClient> hub)
     {
         _logger = logger;
         _hub = hub;

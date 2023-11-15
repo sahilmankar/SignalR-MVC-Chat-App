@@ -1,6 +1,6 @@
 namespace SignalRMVCApp.SignalRHub;
 
-public interface INotificationClient
+public interface IChatClient
 {
     // It has method that should be listen by client
     Task NewUserJoined(string userName);

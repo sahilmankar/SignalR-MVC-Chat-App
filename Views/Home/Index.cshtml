@@ -7,10 +7,7 @@ ViewData["Title"] = "Home Page";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.12/signalr.min.js"></script>
     <script>
         var connection = new signalR.HubConnectionBuilder().withUrl("/notification-hub").build();
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
-
+        
         connection.on("NewUserJoined", function (username) {
             var newusername = document.getElementById("newuserjoined");
             newusername.innerText = username + " " + "joined chat ";
@@ -82,7 +79,7 @@ ViewData["Title"] = "Home Page";
     <input type="text" id="user" placeholder="Enter your name" />
     <button  onclick="joinChat()">Join Chat</button>
     <br />
-    <select id="toUser">
+   To: <select id="toUser">
         <option value="">Select user to send message</option>
     </select>
     <br />

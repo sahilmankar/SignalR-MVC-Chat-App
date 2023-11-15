@@ -21,7 +21,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapHub<NotificationHub>("/notification-hub");
+app.MapHub<ChatHub>("/notification-hub");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

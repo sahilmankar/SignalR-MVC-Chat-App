@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRMVCApp.SignalRHub;
 
-public class NotificationHub : Hub<INotificationClient>
+public class ChatHub : Hub<IChatClient>
 {
     private static Dictionary<string, string> _connections = new();
 
