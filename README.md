@@ -8,6 +8,7 @@
 
 This repository contains a real-time messaging application implemented using SignalR in `.Net 7`. The application demonstrates bidirectional communication between clients and a server, enabling real-time updates and messaging.
 ## Demo
+You can send a message to a particular User or Broadcast to all.
 
 https://github.com/sahilmankar/SignalR-MVC-Chat-App/assets/110836726/e6616f85-988c-4a8c-8594-16701311d811
 
