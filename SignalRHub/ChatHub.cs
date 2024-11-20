@@ -5,7 +5,7 @@ namespace SignalRMVCApp.SignalRHub;
 
 public class ChatHub : Hub<IChatClient>
 {
-    private static Dictionary<string, string> _connections = new();
+    private static ConcurrentDictionary<string, string> _connections = new();
 
     // key -connectionID  value- username
     public override async Task OnConnectedAsync()
